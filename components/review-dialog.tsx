@@ -1,0 +1,8 @@
+"use client";
+
+import { useRef } from "react";
+
+export function ReviewDialog({ action }: { action: (formData: FormData) => void | Promise<void> }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  return <><button className="button button-orange review-open" type="button" onClick={() => dialogRef.current?.showModal()}>Deixar avaliação <span aria-hidden>↗</span></button><dialog className="review-dialog" ref={dialogRef} aria-label="Deixar uma avaliação"><form action={action} className="review-form"><div className="review-dialog-head"><div><p className="kicker">Sua experiência</p><h2>Conte como foi<br/>o atendimento.</h2></div><button type="button" aria-label="Fechar" onClick={() => dialogRef.current?.close()}>×</button></div><label>Seu nome<input name="review_name" required minLength={2} maxLength={80} placeholder="Como podemos te chamar?"/></label><label>Sua nota<select name="review_rating" required defaultValue=""><option value="" disabled>Escolha de 1 a 5 estrelas</option><option value="5">★★★★★ — Excelente</option><option value="4">★★★★ — Muito bom</option><option value="3">★★★ — Bom</option><option value="2">★★ — Regular</option><option value="1">★ — Precisa melhorar</option></select></label><label>Conte sua experiência<textarea name="review_comment" required minLength={10} maxLength={800} rows={4} placeholder="O que você achou do atendimento?"/></label><small>Seu comentário será analisado antes de aparecer no site.</small><button className="button button-orange" type="submit">Enviar avaliação <span aria-hidden>↗</span></button></form></dialog></>;
+}
